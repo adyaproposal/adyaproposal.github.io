@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>A Story For My Love ❤️</title>
+<title>A Story For Adya ❤️</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
     text-align: center;
-    padding: 30px;
+    padding: 40px; /* Increased padding a bit since there are no images */
     animation: fadeIn 1s ease;
   }
 
@@ -49,18 +49,7 @@
   h2 {
     color: #333;
     font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-
-  .memory-photo {
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    opacity: 1;
-    transition: opacity 0.5s ease;
+    margin-bottom: 30px; /* Increased margin */
   }
 
   .option {
@@ -101,23 +90,67 @@
     box-shadow: 0 0 15px rgba(244, 67, 54, 0.7);
   }
 
-  #quiz, #final {
-    display: none; /* Hide both initially */
+  /* All pages are hidden by default */
+  #quiz, #final, #sad-page {
+    display: none; 
   }
 
+  /* Style for the "Yes" message */
   #yes-message {
     display: none; /* Hidden by default */
   }
-
   #yes-message h1 {
     font-size: 2.5rem;
   }
-  
   #yes-message p {
     font-size: 1.2rem;
     color: #333;
   }
+
+  /* Style for the "Sad" message */
+  #sad-page h1 {
+    font-size: 2.5rem;
+  }
+  #sad-page p {
+    font-size: 1.2rem;
+    color: #333;
+  }
   
+  /* Style for the start overlay */
+  #start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  #start-button {
+    background: #ff1493;
+    color: white;
+    font-size: 2rem;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Heart animation styles */
   .hearts {
     position: fixed;
     top: 0;
@@ -127,14 +160,12 @@
     height: 100%;
     overflow: hidden;
   }
-
   .heart {
     position: absolute;
     color: #ff1493;
     animation: floatUp 6s linear infinite;
     font-size: 20px;
   }
-
   @keyframes floatUp {
     0% { transform: translateY(100vh) scale(1); opacity: 1; }
     100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
@@ -143,8 +174,11 @@
 </head>
 <body>
 
+<div id="start-overlay">
+  <button id="start-button">Click to start our story ❤️</button>
+</div>
+
 <div class="container" id="quiz">
-  <img src="" alt="Our Memory" id="memory-photo" class="memory-photo">
   <h2 id="question">Loading...</h2>
   <div id="options">
     </div>
@@ -152,128 +186,122 @@
 
 <div class="container" id="final">
   <div id="proposal-question">
-    <img src="images/ring.jpg" alt="Ring" class="memory-photo"> 
-    <h1>Will you marry me? 💖</h1>
+    <h1>So Adya, will you be my GF? 💖</h1>
     <button class="option yes-button" onclick="handleYes()">Yes!</button>
     <button class="option" id="no-button">No</button>
   </div>
   
   <div id="yes-message">
-    <h1>I knew you'd say yes! 🥰</h1>
-    <p>You've made me the happiest person in the world. I can't wait to spend the rest of my life with you. I love you more than words can say.</p>
+    <h1>I love you! 🥰</h1>
+    <p>You've made me the happiest person in the world. I can't wait to see where this goes.</p>
     <p>Now... look up from the screen ❤️</p>
-    <img src="images/us-happy.jpg" alt="Us" class="memory-photo" style="margin-top: 20px;"> 
   </div>
 </div>
+
+<div class="container" id="sad-page">
+    <h1>Oh... 🥺</h1>
+    <p>I guess my overthinking was not wrong after all...</p>
+    <p>(It's okay, I'm just glad you're here.)</p>
+</div>
+
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <div class="hearts" id="hearts"></div>
 
 <script>
-  // --- TODO: PERSONALIZE YOUR STORY MAP HERE! ---
-  // This is the "map" of your website.
-  // Each ID (like 'start') is a "page".
-  // 'next' tells the button which "page" to go to.
-  // Use 'final_proposal' as the 'next' value to end the quiz.
-  
+  // --- STORY MAP ---
+  // All 'img:' lines have been removed.
   const story = {
     'start': {
-      q: "Do you remember our first date?",
-      img: "images/first-date.jpg", // TODO: Add your photo
+      q: "Do you... want to be my girlfriend?",
       options: [
-        { text: "Yes, it was magical!", next: 'q_cafe' },
-        { text: "Hmm, refresh my memory?", next: 'q_cafe' }
+        { text: "Yes", next: 'q2' },
+        { text: "No", next: 'sad' }
       ]
     },
-    'q_cafe': {
-      q: "We went to that little cafe... remember the rain?",
-      img: "images/cafe.jpg", // TODO: Add your photo
+    'q2': {
+      q: "Are you completely sure?",
       options: [
-        { text: "I'll never forget it!", next: 'q_trip' },
-        { text: "I mostly remember you. ❤️", next: 'q_trip' }
+        { text: "Yes, I am!", next: 'q3' },
+        { text: "No", next: 'sad' }
       ]
     },
-    'q_trip': {
-      q: "And what about our first big trip together?",
-      img: "images/trip.jpg", // TODO: Add your photo
+    'q3': {
+      q: "Are you surely completely sure? (Now is the time to overthink...)",
       options: [
-        { text: "The beach!", next: 'q_silly' },
-        { text: "The mountains!", next: 'q_silly' }
+        { text: "I'm 100% sure!", next: 'q4' },
+        { text: "No", next: 'sad' } 
       ]
     },
-    'q_silly': {
-      q: "Okay, last one... What's my silliest habit?",
-      img: "images/silly-photo.jpg", // TODO: Add your photo
+    'q4': {
+      q: "Are you sure you're ready for all the love and silly jokes? ❤️",
       options: [
-        { text: "Your terrible jokes!", next: 'final_proposal' },
-        { text: "Your weird dance moves.", next: 'final_proposal' },
-        { text: "All of the above! 😝", next: 'final_proposal' }
+        { text: "Bring it on!", next: 'final_proposal' },
+        { text: "No", next: 'sad' }
       ]
     }
-    // You can add many more nodes here, e.g.:
-    // 'another_path': {
-    //   q: "What about...",
-    //   img: "images/another.jpg",
-    //   options: [
-    //     { text: "Go here", next: 'q_trip' },
-    //     { text: "Go there", next: 'q_silly' }
-    //   ]
-    // }
   };
-  // --- END OF PERSONALIZATION ---
-
+  // --- END OF STORY MAP ---
 
   const qEl = document.getElementById("question");
   const optEl = document.getElementById("options");
   const quiz = document.getElementById("quiz");
   const final = document.getElementById("final");
   const hearts = document.getElementById("hearts");
-  const photoEl = document.getElementById("memory-photo");
   const noButton = document.getElementById("no-button");
-  const container = document.querySelector(".container");
+  const sadPage = document.getElementById("sad-page");
+  const startOverlay = document.getElementById("start-overlay");
+  const startButton = document.getElementById("start-button");
+  const music = document.getElementById("bg-music");
 
-  // This function loads a "page" from your story map
+  // --- Music and Start Button Logic ---
+  startButton.addEventListener("click", () => {
+    music.play();
+    startOverlay.style.display = "none";
+    quiz.style.display = "block";
+    loadStoryNode('start');
+  });
+
+  // --- Story Logic ---
   function loadStoryNode(nodeId) {
     const node = story[nodeId];
 
-    // Fade out for transition
-    photoEl.style.opacity = 0;
+    // Fade out text
     qEl.style.opacity = 0;
     optEl.style.opacity = 0;
 
     setTimeout(() => {
-      // Update the content
       qEl.innerText = node.q;
-      photoEl.src = node.img;
       optEl.innerHTML = ""; // Clear old options
 
-      // Create new option buttons
       node.options.forEach(option => {
-        // Create a new button element
         const button = document.createElement("button");
         button.classList.add("option");
         button.innerText = option.text;
-        // IMPORTANT: Set the onclick to call chooseOption with the 'next' ID
         button.setAttribute("onclick", `chooseOption('${option.next}')`);
         optEl.appendChild(button);
       });
 
-      // Fade back in
-      photoEl.style.opacity = 1;
+      // Fade in new text
       qEl.style.opacity = 1;
       optEl.style.opacity = 1;
-    }, 500); // 0.5s for fade out
+    }, 500); 
   }
 
   // This function is called when an option is clicked
-  function chooseOption(nodeId) {
-    if (nodeId === 'final_proposal') {
-      // Time for the big question!
+  function chooseOption(nextNodeId) {
+    if (nextNodeId === 'final_proposal') {
       quiz.style.display = 'none';
       final.style.display = 'block';
-      launchHearts(60); // More hearts!
+      launchHearts(60);
+    } else if (nextNodeId === 'sad') {
+      quiz.style.display = 'none';
+      sadPage.style.display = 'block'; // Show the sad page
     } else {
-      // Go to the next "page" in the story
-      loadStoryNode(nodeId);
+      loadStoryNode(nextNodeId);
     }
   }
 
@@ -281,20 +309,17 @@
   function handleYes() {
     document.getElementById("proposal-question").style.display = "none";
     document.getElementById("yes-message").style.display = "block";
-    launchHearts(100); // Maximum hearts!
+    launchHearts(100); 
   }
 
   // Make the "No" button run away
   noButton.addEventListener("mouseover", () => {
     const containerRect = final.getBoundingClientRect();
     const noBtnRect = noButton.getBoundingClientRect();
-
     let newTop = Math.random() * (containerRect.height - noBtnRect.height);
     let newLeft = Math.random() * (containerRect.width - noBtnRect.width);
-
     newTop = Math.max(10, Math.min(newTop, containerRect.height - noBtnRect.height - 10));
     newLeft = Math.max(10, Math.min(newLeft, containerRect.width - noBtnRect.width - 10));
-
     noButton.style.top = newTop + "px";
     noButton.style.left = newLeft + "px";
   });
@@ -311,9 +336,6 @@
     }
   }
 
-  // Start the story
-  quiz.style.display = "block";
-  loadStoryNode('start'); // Load the first "page"
 </script>
 
 </body>
