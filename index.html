@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>A Story For Adya ❤️</title>
+<title>Proposal</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align: items-center;
   }
 
   .container {
@@ -30,7 +30,7 @@
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
     text-align: center;
-    padding: 40px; /* Increased padding a bit since there are no images */
+    padding: 40px;
     animation: fadeIn 1s ease;
   }
 
@@ -39,6 +39,7 @@
     to { opacity: 1; transform: scale(1); }
   }
 
+  /* This is the "stylish" font for main questions */
   h1 {
     font-family: 'Great Vibes', cursive;
     color: #ff1493;
@@ -46,10 +47,11 @@
     font-size: 3.5rem;
   }
 
+  /* This is the clean font for sub-questions */
   h2 {
     color: #333;
     font-size: 1.5rem;
-    margin-bottom: 30px; /* Increased margin */
+    margin-bottom: 30px; 
   }
 
   .option {
@@ -95,19 +97,24 @@
     display: none; 
   }
 
-  /* Style for the "Yes" message */
+  /* 7. FONT CHANGE: "Yes" message styles changed */
   #yes-message {
     display: none; /* Hidden by default */
   }
+  /* This now uses the clean 'Poppins' font, not 'Great Vibes' */
   #yes-message h1 {
-    font-size: 2.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.2rem; /* Made it a bit smaller to look less "stylish" */
+    color: #333;
   }
   #yes-message p {
     font-size: 1.2rem;
     color: #333;
   }
+  /* END OF FONT CHANGE */
 
-  /* Style for the "Sad" message */
+  /* "Sad" message styles */
   #sad-page h1 {
     font-size: 2.5rem;
   }
@@ -175,7 +182,7 @@
 <body>
 
 <div id="start-overlay">
-  <button id="start-button">Click to start our story ❤️</button>
+  <button id="start-button">A quick question for you... 👀</button>
 </div>
 
 <div class="container" id="quiz">
@@ -199,13 +206,13 @@
 </div>
 
 <div class="container" id="sad-page">
-    <h1>Oh... 🥺</h1>
+    <h1>Oh... 🥺😔💔</h1>
     <p>I guess my overthinking was not wrong after all...</p>
-    <p>(It's okay, I'm just glad you're here.)</p>
+    <p>I am still so glad I have you as a friend.</p>
 </div>
 
 <audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="/adyaproposal/music.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
@@ -213,7 +220,7 @@
 
 <script>
   // --- STORY MAP ---
-  // All 'img:' lines have been removed.
+  // All questions updated
   const story = {
     'start': {
       q: "Do you... want to be my girlfriend?",
@@ -223,21 +230,24 @@
       ]
     },
     'q2': {
-      q: "Are you completely sure?",
+      // 4. Question 2 changed
+      q: "Are you completely sure? 😮",
       options: [
         { text: "Yes, I am!", next: 'q3' },
         { text: "No", next: 'sad' }
       ]
     },
     'q3': {
-      q: "Are you surely completely sure? (Now is the time to overthink...)",
+      // 5. Question 3 changed
+      q: "Okay, but are you *absolutely* sure? (This is your last chance to overthink it!)",
       options: [
         { text: "I'm 100% sure!", next: 'q4' },
         { text: "No", next: 'sad' } 
       ]
     },
     'q4': {
-      q: "Are you sure you're ready for all the love and silly jokes? ❤️",
+      // 6. Question 4 changed
+      q: "Are you *really* ready for my wrongly-timed humour and to deal with all my relationship stupidity? 😅",
       options: [
         { text: "Bring it on!", next: 'final_proposal' },
         { text: "No", next: 'sad' }
