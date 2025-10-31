@@ -18,7 +18,8 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align: items-center;
+    /* 1. CSS TYPO FIX: Changed 'align:' back to 'align-items:' */
+    align-items: center;
   }
 
   .container {
@@ -97,7 +98,7 @@
     display: none; 
   }
 
-  /* 7. FONT CHANGE: "Yes" message styles changed */
+  /* "Yes" message styles changed */
   #yes-message {
     display: none; /* Hidden by default */
   }
@@ -105,14 +106,13 @@
   #yes-message h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 2.2rem; /* Made it a bit smaller to look less "stylish" */
+    font-size: 2.2rem;
     color: #333;
   }
   #yes-message p {
     font-size: 1.2rem;
     color: #333;
   }
-  /* END OF FONT CHANGE */
 
   /* "Sad" message styles */
   #sad-page h1 {
@@ -220,7 +220,7 @@
 
 <script>
   // --- STORY MAP ---
-  // All questions updated
+  // 2. TEXT FIX: Removed asterisks
   const story = {
     'start': {
       q: "Do you... want to be my girlfriend?",
@@ -230,7 +230,6 @@
       ]
     },
     'q2': {
-      // 4. Question 2 changed
       q: "Are you completely sure? 😮",
       options: [
         { text: "Yes, I am!", next: 'q3' },
@@ -238,16 +237,14 @@
       ]
     },
     'q3': {
-      // 5. Question 3 changed
-      q: "Okay, but are you *absolutely* sure? (This is your last chance to overthink it!)",
+      q: "Okay, but are you absolutely sure? (This is your last chance to overthink it!)",
       options: [
         { text: "I'm 100% sure!", next: 'q4' },
         { text: "No", next: 'sad' } 
       ]
     },
     'q4': {
-      // 6. Question 4 changed
-      q: "Are you *really* ready for my wrongly-timed humour and to deal with all my relationship stupidity? 😅",
+      q: "Are you really ready for my wrongly-timed humour and to deal with all my relationship stupidity? 😅",
       options: [
         { text: "Bring it on!", next: 'final_proposal' },
         { text: "No", next: 'sad' }
