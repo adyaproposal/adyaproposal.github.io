@@ -1,348 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proposal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proposal</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
 
-<style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle at top left, #ffdee9, #b5fffc);
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    /* 1. CSS TYPO FIX: Changed 'align:' back to 'align-items:' */
-    align-items: center;
-  }
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            /* 1. DARK MODE: Background changed */
+            background: radial-gradient(circle at top left, #2b1055, #12121e);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-  .container {
-    position: relative;
-    width: 90%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
-    text-align: center;
-    padding: 40px;
-    animation: fadeIn 1s ease;
-  }
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            /* This light-blur container looks great on a dark background */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+            text-align: center;
+            padding: 40px;
+            animation: fadeIn 1s ease;
+        }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
 
-  /* This is the "stylish" font for main questions */
-  h1 {
-    font-family: 'Great Vibes', cursive;
-    color: #ff1493;
-    margin-bottom: 20px;
-    font-size: 3.5rem;
-  }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-  /* This is the clean font for sub-questions */
-  h2 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 30px; 
-  }
+        /* Stylish font for the main "Will you be my GF?" question */
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff1493;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+        }
 
-  .option {
-    background: white;
-    border: none;
-    border-radius: 12px;
-    padding: 15px 25px;
-    margin: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+        /* 2. DARK MODE: Text color changed to light */
+        h2 {
+            color: #f0f0f0;
+            /* Was #333 */
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
 
-  .option:hover {
-    background: #ff1493;
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-  }
-  
-  .yes-button {
-    background: #4CAF50;
-    color: white;
-  }
-  .yes-button:hover {
-    background: #45a049;
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
-  }
+        .option {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-  #no-button {
-    position: absolute;
-    background: #f44336;
-    color: white;
-  }
-  #no-button:hover {
-    background: #d32f2f;
-    box-shadow: 0 0 15px rgba(244, 67, 54, 0.7);
-  }
+        .option:hover {
+            background: #ff1493;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+        }
 
-  /* All pages are hidden by default */
-  #quiz, #final, #sad-page {
-    display: none; 
-  }
+        .yes-button {
+            background: #4CAF50;
+            color: white;
+        }
 
-  /* "Yes" message styles changed */
-  #yes-message {
-    display: none; /* Hidden by default */
-  }
-  /* This now uses the clean 'Poppins' font, not 'Great Vibes' */
-  #yes-message h1 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 2.2rem;
-    color: #333;
-  }
-  #yes-message p {
-    font-size: 1.2rem;
-    color: #333;
-  }
+        .yes-button:hover {
+            background: #45a049;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+        }
 
-  /* "Sad" message styles */
-  #sad-page h1 {
-    font-size: 2.5rem;
-  }
-  #sad-page p {
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  /* Style for the start overlay */
-  #start-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+        #no-button {
+            position: absolute;
+            background: #f44336;
+            color: white;
+        }
 
-  #start-button {
-    background: #ff1493;
-    color: white;
-    font-size: 2rem;
-    padding: 20px 40px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
-    animation: pulse 2s infinite;
-  }
+        #no-button:hover {
+            background: #d32f2f;
+            box-shadow: 0 0 15px rgba(244, 67, 54, 0.7);
+        }
 
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Heart animation styles */
-  .hearts {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .heart {
-    position: absolute;
-    color: #ff1493;
-    animation: floatUp 6s linear infinite;
-    font-size: 20px;
-  }
-  @keyframes floatUp {
-    0% { transform: translateY(100vh) scale(1); opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-  }
-</style>
+        /* All pages are hidden by default */
+        #quiz,
+        #final,
+        #sad-page {
+            display: none;
+        }
+
+        /* "Yes" message styles */
+        #yes-message {
+            display: none;
+            /* Hidden by default */
+        }
+
+        #yes-message h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 2.2rem;
+            /* 2. DARK MODE: Text color changed */
+            color: #f0f0f0;
+            /* Was #333 */
+        }
+
+        #yes-message p {
+            font-size: 1.2rem;
+            /* 2. DARK MODE: Text color changed */
+            color: #f0f0f0;
+            /* Was #333 */
+        }
+
+        /* "Sad" message styles */
+        #sad-page h1 {
+            font-size: 2.5rem;
+        }
+
+        #sad-page p {
+            font-size: 1.2rem;
+            /* 2. DARK MODE: Text color changed */
+            color: #f0f0f0;
+            /* Was #333 */
+        }
+
+        /* Style for the start overlay */
+        #start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        #start-button {
+            background: #ff1493;
+            color: white;
+            font-size: 2rem;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Heart animation styles */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff1493;
+            animation: floatUp 6s linear infinite;
+            font-size: 20px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div id="start-overlay">
-  <button id="start-button">A quick question for you... 👀</button>
-</div>
-
-<div class="container" id="quiz">
-  <h2 id="question">Loading...</h2>
-  <div id="options">
+    <div id="start-overlay">
+        <button id="start-button">A quick question for you... 👀</button>
     </div>
-</div>
 
-<div class="container" id="final">
-  <div id="proposal-question">
-    <h1>So Adya, will you be my GF? 💖</h1>
-    <button class="option yes-button" onclick="handleYes()">Yes!</button>
-    <button class="option" id="no-button">No</button>
-  </div>
-  
-  <div id="yes-message">
-    <h1>I love you! 🥰</h1>
-    <p>You've made me the happiest person in the world.</p>
-  </div>
-</div>
+    <div class="container" id="quiz">
+        <h2 id="question">Loading...</h2>
+        <div id="options">
+        </div>
+    </div>
 
-<div class="container" id="sad-page">
-    <h1>Oh... 🥺😔💔</h1>
-    <p>I guess my overthinking was not wrong after all...</p>
-    <p>I am still so glad I have you as a friend.</p>
-</div>
+    <div class="container" id="final">
+        <div id="proposal-question">
+            <h1>So Adya, will you be my GF? 💖</h1>
+            <button class="option yes-button" onclick="handleYes()">Yes!</button>
+            <button class="option" id="no-button">No</button>
+        </div>
 
-<audio id="bg-music" loop>
-  <source src="/adyaproposal/music.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+        <div id="yes-message">
+            <h1>I love you! 🥰</h1>
+            <p>You've made me the happiest person in the world.</p>
+        </div>
+    </div>
 
-<div class="hearts" id="hearts"></div>
+    <div class="container" id="sad-page">
+        <h1>Oh... 🥺😔💔</h1>
+        <p>I guess my overthinking was not wrong after all...</p>
+        <p>I am still so glad I have you as a friend.</p>
+    </div>
 
-<script>
-  // --- STORY MAP ---
-  // 2. TEXT FIX: Removed asterisks
-  const story = {
-    'start': {
-      q: "Do you... want to be my girlfriend?",
-      options: [
-        { text: "Yes", next: 'q2' },
-        { text: "No", next: 'sad' }
-      ]
-    },
-    'q2': {
-      q: "Are you completely sure? 😮",
-      options: [
-        { text: "Yes, I am!", next: 'q3' },
-        { text: "No", next: 'sad' }
-      ]
-    },
-    'q3': {
-      q: "Okay, but are you absolutely sure? (This is your last chance to overthink it!)",
-      options: [
-        { text: "I'm 100% sure!", next: 'q4' },
-        { text: "No", next: 'sad' } 
-      ]
-    },
-    'q4': {
-      q: "Are you really ready for my wrongly-timed humour and to deal with all my relationship stupidity? 😅",
-      options: [
-        { text: "Bring it on!", next: 'final_proposal' },
-        { text: "No", next: 'sad' }
-      ]
-    }
-  };
-  // --- END OF STORY MAP ---
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-  const qEl = document.getElementById("question");
-  const optEl = document.getElementById("options");
-  const quiz = document.getElementById("quiz");
-  const final = document.getElementById("final");
-  const hearts = document.getElementById("hearts");
-  const noButton = document.getElementById("no-button");
-  const sadPage = document.getElementById("sad-page");
-  const startOverlay = document.getElementById("start-overlay");
-  const startButton = document.getElementById("start-button");
-  const music = document.getElementById("bg-music");
+    <div class="hearts" id="hearts"></div>
 
-  // --- Music and Start Button Logic ---
-  startButton.addEventListener("click", () => {
-    music.play();
-    startOverlay.style.display = "none";
-    quiz.style.display = "block";
-    loadStoryNode('start');
-  });
+    <script>
+        // --- STORY MAP ---
+        const story = {
+            'start': {
+                q: "Do you... want to be my girlfriend?",
+                options: [
+                    { text: "Yes", next: 'q2' },
+                    { text: "No", next: 'sad' }
+                ]
+            },
+            'q2': {
+                q: "Are you completely sure? 😮",
+                options: [
+                    { text: "Yes, I am!", next: 'q3' },
+                    { text: "No", next: 'sad' }
+                ]
+            },
+            'q3': {
+                q: "Okay, but are you absolutely sure? (This is your last chance to overthink it!)",
+                options: [
+                    { text: "I'm 100% sure!", next: 'q4' },
+                    { text: "No", next: 'sad' }
+                ]
+            },
+            'q4': {
+                q: "Are you really ready for my wrongly-timed humour and to deal with all my relationship stupidity? 😅",
+                options: [
+                    { text: "Bring it on!", next: 'final_proposal' },
+                    { text: "No", next: 'sad' }
+                ]
+            }
+        };
+        // --- END OF STORY MAP ---
 
-  // --- Story Logic ---
-  function loadStoryNode(nodeId) {
-    const node = story[nodeId];
+        const qEl = document.getElementById("question");
+        const optEl = document.getElementById("options");
+        const quiz = document.getElementById("quiz");
+        const final = document.getElementById("final");
+        const hearts = document.getElementById("hearts");
+        const noButton = document.getElementById("no-button");
+        const sadPage = document.getElementById("sad-page");
+        const startOverlay = document.getElementById("start-overlay");
+        const startButton = document.getElementById("start-button");
+        const music = document.getElementById("bg-music");
 
-    // Fade out text
-    qEl.style.opacity = 0;
-    optEl.style.opacity = 0;
+        // --- Music and Start Button Logic ---
+        startButton.addEventListener("click", () => {
+            music.play();
+            startOverlay.style.display = "none";
+            quiz.style.display = "block";
+            loadStoryNode('start');
+        });
 
-    setTimeout(() => {
-      qEl.innerText = node.q;
-      optEl.innerHTML = ""; // Clear old options
+        // --- Story Logic ---
+        function loadStoryNode(nodeId) {
+            const node = story[nodeId];
 
-      node.options.forEach(option => {
-        const button = document.createElement("button");
-        button.classList.add("option");
-        button.innerText = option.text;
-        button.setAttribute("onclick", `chooseOption('${option.next}')`);
-        optEl.appendChild(button);
-      });
+            // Fade out text
+            qEl.style.opacity = 0;
+            optEl.style.opacity = 0;
 
-      // Fade in new text
-      qEl.style.opacity = 1;
-      optEl.style.opacity = 1;
-    }, 500); 
-  }
+            setTimeout(() => {
+                qEl.innerText = node.q;
+                optEl.innerHTML = ""; // Clear old options
 
-  // This function is called when an option is clicked
-  function chooseOption(nextNodeId) {
-    if (nextNodeId === 'final_proposal') {
-      quiz.style.display = 'none';
-      final.style.display = 'block';
-      launchHearts(60);
-    } else if (nextNodeId === 'sad') {
-      quiz.style.display = 'none';
-      sadPage.style.display = 'block'; // Show the sad page
-    } else {
-      loadStoryNode(nextNodeId);
-    }
-  }
+                node.options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.classList.add("option");
+                    button.innerText = option.text;
+                    button.setAttribute("onclick", `chooseOption('${option.next}')`);
+                    optEl.appendChild(button);
+                });
 
-  // Handle the "Yes" click
-  function handleYes() {
-    document.getElementById("proposal-question").style.display = "none";
-    document.getElementById("yes-message").style.display = "block";
-    launchHearts(100); 
-  }
+                // Fade in new text
+                qEl.style.opacity = 1;
+                optEl.style.opacity = 1;
+            }, 500);
+        }
 
-  // Make the "No" button run away
-  noButton.addEventListener("mouseover", () => {
-    const containerRect = final.getBoundingClientRect();
-    const noBtnRect = noButton.getBoundingClientRect();
-    let newTop = Math.random() * (containerRect.height - noBtnRect.height);
-    let newLeft = Math.random() * (containerRect.width - noBtnRect.width);
-    newTop = Math.max(10, Math.min(newTop, containerRect.height - noBtnRect.height - 10));
-    newLeft = Math.max(10, Math.min(newLeft, containerRect.width - noBtnRect.width - 10));
-    noButton.style.top = newTop + "px";
-    noButton.style.left = newLeft + "px";
-  });
+        // This function is called when an option is clicked
+        function chooseOption(nextNodeId) {
+            if (nextNodeId === 'final_proposal') {
+                quiz.style.display = 'none';
+                final.style.display = 'block';
+                launchHearts(60);
+            } else if (nextNodeId === 'sad') {
+                quiz.style.display = 'none';
+                sadPage.style.display = 'block'; // Show the sad page
+            } else {
+                loadStoryNode(nextNodeId);
+            }
+        }
 
-  function launchHearts(count = 40) {
-    for (let i = 0; i < count; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
-      hearts.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
-    }
-  }
+        // Handle the "Yes" click
+        function handleYes() {
+            document.getElementById("proposal-question").style.display = "none";
+            document.getElementById("yes-message").style.display = "block";
+            launchHearts(100);
+        }
 
-</script>
+        // Make the "No" button run away
+        noButton.addEventListener("mouseover", () => {
+            const containerRect = final.getBoundingClientRect();
+            const noBtnRect = noButton.getBoundingClientRect();
+            let newTop = Math.random() * (containerRect.height - noBtnRect.height);
+            let newLeft = Math.random() * (containerRect.width - noBtnRect.width);
+            newTop = Math.max(10, Math.min(newTop, containerRect.height - noBtnRect.height - 10));
+            newLeft = Math.max(10, Math.min(newLeft, containerRect.width - noBtnRect.width - 10));
+            noButton.style.top = newTop + "px";
+            noButton.style.left = newLeft + "px";
+        });
+
+        function launchHearts(count = 40) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+                hearts.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }
+        }
+
+    </script>
 
 </body>
+
 </html>
