@@ -100,3 +100,158 @@
             font-family: 'Lobster', cursive;
             transition: transform 0.2s;
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* SIGNIFICANTLY SMALLER NO BUTTON */
+        .no-btn {
+            background-color: #f0f0f0;
+            color: #666;
+            border: 1px solid #ccc;
+            padding: 5px 10px; /* Tiny padding */
+            font-size: 0.7rem; /* Tiny font */
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .no-btn:hover {
+            background-color: #ddd;
+        }
+
+        /* --- GIFT BOX --- */
+        .gift-container {
+            margin-top: 30px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .gift-container:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .gift-emoji {
+            font-size: 5rem;
+        }
+
+        /* --- SOCK CONFETTI --- */
+        .sock-confetti {
+            position: fixed;
+            top: -150px;
+            z-index: 9999;
+            pointer-events: none;
+            /* Slower animation applied in JS */
+        }
+
+        /* --- UTILITY --- */
+        .hidden { display: none; }
+        
+        /* Spacer class for the specific text requirement */
+        .spacer {
+            display: block;
+            margin-top: 25px; /* Creates the specific "space" requested */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="view-question">
+        <p>I promise to be loyal, but moody, but lovable, but irritating, but aapka forever. Deal? 💍</p>
+
+        <h1>Will you be my Valentine?</h1>
+        
+        <div class="btn-group">
+            <button class="yes-btn" onclick="handleYes()">YES!</button>
+            <button class="no-btn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="view-sad">
+        <h1 style="font-size: 2rem;">Excuse me?! 😤</h1>
+        <p>
+            I am very sad that teri gaandmasti itni zyada hai ki tujhe no click karna hai, yes click nahi hota na tujhse bsdk. 
+            <br><br>
+            Ab I have become a sad joru ka gulam, but regardless I do not allow you to choose NO so go back bitch.
+            <br><br>
+            Itni BKL hai na tu ki multiple baar no click karegi apni curiosity disragarding ki mera dil tootega.
+        </p>
+    </div>
+
+    <div class="card hidden" id="view-happy">
+        <h1>YAYYY! 💖</h1>
+        <p>
+            I am a happy Joru ka Gulam
+            <span class="spacer">Aapke liye Maharani</span>
+        </p>
+        
+        <div class="gift-container" onclick="explodeSockConfetti()">
+            <div class="gift-emoji">🎁</div>
+            <p style="font-size: 0.8rem; margin: 0; color: #888;">(Click to open at your own risk)</p>
+        </div>
+    </div>
+
+    <script>
+        const viewQuestion = document.getElementById('view-question');
+        const viewSad = document.getElementById('view-sad');
+        const viewHappy = document.getElementById('view-happy');
+
+        function handleNo() {
+            viewQuestion.classList.add('hidden');
+            viewSad.classList.remove('hidden');
+
+            // Changed to 5 seconds
+            setTimeout(() => {
+                location.reload(); 
+            }, 5000);
+        }
+
+        function handleYes() {
+            viewQuestion.classList.add('hidden');
+            viewHappy.classList.remove('hidden');
+        }
+
+        function explodeSockConfetti() {
+            // Reduced count to 15
+            const count = 15;
+            const container = document.body;
+
+            for (let i = 0; i < count; i++) {
+                const sock = document.createElement('img');
+                sock.src = 'confetti.jpg'; 
+                sock.classList.add('sock-confetti');
+                
+                // Randomize position
+                sock.style.left = Math.random() * 95 + 'vw';
+                
+                // Varied size (Small to Medium)
+                const size = Math.random() * 40 + 30; // 30px to 70px
+                sock.style.width = size + 'px';
+                
+                // SLOWER falling speed (5s to 10s duration)
+                const duration = Math.random() * 5 + 5; 
+                
+                sock.style.transition = `top ${duration}s linear, transform ${duration}s linear`;
+                sock.style.top = '-100px';
+                
+                container.appendChild(sock);
+
+                // Trigger animation in next frame
+                requestAnimationFrame(() => {
+                    sock.style.top = '110vh';
+                    sock.style.transform = `rotate(${Math.random() * 360}deg)`;
+                });
+
+                // Cleanup
+                setTimeout(() => {
+                    sock.remove();
+                }, duration * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
