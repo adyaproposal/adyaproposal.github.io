@@ -7,220 +7,204 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. POP ART THEME SETUP --- */
         :root {
-            --primary-yellow: #FFD700;
-            --pop-red: #FF4500;
-            --pop-blue: #1E90FF;
-            --black: #000;
-            --border-thick: 4px solid var(--black);
-            --shadow-hard: 8px 8px 0px var(--black);
+            --primary-color: #ff4d6d;
+            --bg-color: #ffe5ec;
+            --card-bg: rgba(255, 255, 255, 0.95);
         }
 
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            overflow: hidden; /* Prevent scrolling */
-            font-family: 'Comic Neue', cursive;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
             
-            /* USER PHOTO AS BACKGROUND */
-            background: url('background.jpg') no-repeat center center fixed; 
-            background-size: cover;
+            /* --- THE VIBEY BACKGROUND PATTERN --- */
+            /* This creates a soft gradient background */
+            background-color: var(--bg-color); 
+            background-image: url('background.jpg');
+            
+            /* This makes the image repeat like tiles/dots */
+            background-repeat: space; 
+            
+            /* Sizing: Adjust '18vw' to make them bigger or smaller. 
+               18vw means roughly 5-6 images fit across the width. */
+            background-size: 18vw auto; 
+            
+            /* Blends the image slightly with the pink background for a 'vibe' */
+            background-blend-mode: overlay;
         }
 
-        /* Overlay to make text readable over the photo */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 215, 0, 0.85); /* Strong yellow tint for Pop vibe */
-            backdrop-filter: blur(5px);
-            z-index: 1;
-        }
-
-        /* --- 2. MAIN CARD STYLE --- */
+        /* --- CARD DESIGN --- */
         .card {
             position: relative;
             z-index: 10;
-            background: white;
-            width: 90%;
-            max-width: 450px;
+            background: var(--card-bg);
+            width: 85%;
+            max-width: 500px;
             margin: 0 auto;
             top: 50%;
             transform: translateY(-50%);
-            padding: 30px;
+            padding: 40px 30px;
             text-align: center;
-            border: var(--border-thick);
-            box-shadow: var(--shadow-hard);
-            border-radius: 15px;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
         }
 
-        @keyframes popIn {
-            0% { transform: translateY(-50%) scale(0.5); opacity: 0; }
-            100% { transform: translateY(-50%) scale(1); opacity: 1; }
+        @keyframes float {
+            0% { transform: translateY(-50%) translateY(0px); }
+            50% { transform: translateY(-50%) translateY(-10px); }
+            100% { transform: translateY(-50%) translateY(0px); }
         }
 
         h1 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Lobster', cursive;
             font-size: 3rem;
-            color: var(--black);
-            margin: 10px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px var(--pop-blue);
+            color: var(--primary-color);
+            margin: 0 0 20px 0;
+            line-height: 1.2;
         }
 
         p {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #333;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
 
-        /* --- 3. BUTTONS --- */
+        /* --- BUTTONS --- */
         .btn-group {
             display: flex;
+            align-items: center; /* Aligns them vertically */
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             margin-top: 20px;
-        }
-
-        .btn {
-            font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
-            padding: 10px 30px;
-            border: 3px solid var(--black);
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.1s;
-            box-shadow: 4px 4px 0px var(--black);
-        }
-
-        .btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px var(--black);
         }
 
         .yes-btn {
-            background-color: var(--pop-red);
+            background-color: var(--primary-color);
             color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Lobster', cursive;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
         }
 
+        .yes-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* SIGNIFICANTLY SMALLER NO BUTTON */
         .no-btn {
-            background-color: white;
-            color: var(--black);
+            background-color: #f0f0f0;
+            color: #666;
+            border: 1px solid #ccc;
+            padding: 5px 10px; /* Tiny padding */
+            font-size: 0.7rem; /* Tiny font */
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s;
         }
 
-        /* --- 4. GIFT BOX --- */
+        .no-btn:hover {
+            background-color: #ddd;
+        }
+
+        /* --- GIFT BOX --- */
         .gift-container {
-            margin-top: 20px;
+            margin-top: 30px;
             cursor: pointer;
             display: inline-block;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
-
+        
         .gift-container:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: rotate(-10deg) scale(1.1);
         }
 
         .gift-emoji {
             font-size: 5rem;
-            filter: drop-shadow(4px 4px 0px black);
         }
 
-        .click-hint {
-            font-size: 0.9rem;
-            color: var(--pop-blue);
-            font-weight: bold;
-            margin-top: -10px;
-        }
-
-        /* --- 5. CUSTOM CONFETTI (THE SOCK) --- */
+        /* --- SOCK CONFETTI --- */
         .sock-confetti {
             position: fixed;
-            top: -100px;
+            top: -150px;
             z-index: 9999;
-            width: 50px; /* Size of the falling sock */
             pointer-events: none;
-            animation: fall linear forwards;
+            /* Slower animation applied in JS */
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-
-        /* --- 6. UTILITY CLASSES --- */
+        /* --- UTILITY --- */
         .hidden { display: none; }
+        
+        /* Spacer class for the specific text requirement */
+        .spacer {
+            display: block;
+            margin-top: 25px; /* Creates the specific "space" requested */
+        }
     </style>
 </head>
 <body>
 
-    <div class="overlay"></div>
-
     <div class="card" id="view-question">
-        <img src="background.jpg" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid black; margin-bottom: 10px;">
-        <h1>Be My Valentine?</h1>
+        <h1>Will you be my Valentine?</h1>
         <p>I promise to be annoying forever. Deal? 💍</p>
         
         <div class="btn-group">
-            <button class="btn yes-btn" onclick="handleYes()">YES!</button>
-            <button class="btn no-btn" onclick="handleNo()">NO</button>
+            <button class="yes-btn" onclick="handleYes()">YES!</button>
+            <button class="no-btn" onclick="handleNo()">No</button>
         </div>
     </div>
 
     <div class="card hidden" id="view-sad">
-        <h1 style="color: var(--pop-red);">Excuse me?! 😤</h1>
+        <h1 style="font-size: 2rem;">Excuse me?! 😤</h1>
         <p>
             I am very sad that teri gaandmasti itni zyada hai ki tujhe no clic karna hai, yes click nahi hota na tujhse bsdk. 
             <br><br>
             Ab I have become a sad joru ka gulam, but regardless I do not allow you to choose so go back.
         </p>
-        <p style="font-size: 0.9rem; color: var(--pop-blue);">Resetting system in <span id="timer">10</span>s...</p>
     </div>
 
     <div class="card hidden" id="view-happy">
-        <h1 style="color: var(--pop-blue);">YAYYY! 💖</h1>
-        <p>I am a happy joru ka gulam now aapke liye maharani.</p>
+        <h1>YAYYY! 💖</h1>
+        <p>
+            I am a happy Joru ka Gulam
+            <span class="spacer">Aapke liye Maharani</span>
+        </p>
         
         <div class="gift-container" onclick="explodeSockConfetti()">
             <div class="gift-emoji">🎁</div>
-            <div class="click-hint">(Click me!)</div>
+            <p style="font-size: 0.8rem; margin: 0; color: #888;">(Click to open)</p>
         </div>
     </div>
 
     <script>
-        // --- LOGIC ---
-        
         const viewQuestion = document.getElementById('view-question');
         const viewSad = document.getElementById('view-sad');
         const viewHappy = document.getElementById('view-happy');
-        const timerSpan = document.getElementById('timer');
 
         function handleNo() {
-            // Switch views
             viewQuestion.classList.add('hidden');
             viewSad.classList.remove('hidden');
 
-            // Start 10s Countdown
-            let timeLeft = 10;
-            const interval = setInterval(() => {
-                timeLeft--;
-                timerSpan.innerText = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    // Surprise Jump Back
-                    location.reload(); 
-                }
-            }, 1000);
+            // Wait 10 seconds, then reload (No countdown text shown)
+            setTimeout(() => {
+                location.reload(); 
+            }, 10000);
         }
 
         function handleYes() {
@@ -229,26 +213,40 @@
         }
 
         function explodeSockConfetti() {
-            // Create 50 socks
-            const count = 50;
+            // Reduced count to 15
+            const count = 15;
             const container = document.body;
 
             for (let i = 0; i < count; i++) {
                 const sock = document.createElement('img');
-                sock.src = 'confetti.jpg'; // This is your 6.jpg
+                sock.src = 'confetti.jpg'; 
                 sock.classList.add('sock-confetti');
                 
-                // Randomize position and speed
-                sock.style.left = Math.random() * 100 + 'vw';
-                sock.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 seconds
-                sock.style.width = (Math.random() * 40 + 30) + 'px'; // Random size
+                // Randomize position
+                sock.style.left = Math.random() * 95 + 'vw';
+                
+                // Varied size (Small to Medium)
+                const size = Math.random() * 40 + 30; // 30px to 70px
+                sock.style.width = size + 'px';
+                
+                // SLOWER falling speed (5s to 10s duration)
+                const duration = Math.random() * 5 + 5; 
+                
+                sock.style.transition = `top ${duration}s linear, transform ${duration}s linear`;
+                sock.style.top = '-100px';
                 
                 container.appendChild(sock);
 
-                // Cleanup after animation
+                // Trigger animation in next frame
+                requestAnimationFrame(() => {
+                    sock.style.top = '110vh';
+                    sock.style.transform = `rotate(${Math.random() * 360}deg)`;
+                });
+
+                // Cleanup
                 setTimeout(() => {
                     sock.remove();
-                }, 5000);
+                }, duration * 1000);
             }
         }
     </script>
